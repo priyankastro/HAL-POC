@@ -1,6 +1,0 @@
-Following resources are marked to be skipped:
-
-- /subscriptions/1988e0e4-7595-4e9a-91cb-242d277198f0/resourceGroups/rg-priyankadget/providers/Microsoft.Network/dnszones/priyankadget.com/SOA/@
-- /subscriptions/1988e0e4-7595-4e9a-91cb-242d277198f0/resourceGroups/rg-priyankadget/providers/Microsoft.Web/sites/app-test2-eastus/basicPublishingCredentialsPolicies/ftp
-- /subscriptions/1988e0e4-7595-4e9a-91cb-242d277198f0/resourceGroups/rg-priyankadget/providers/Microsoft.Web/sites/app-test2-eastus/basicPublishingCredentialsPolicies/scm
-- /subscriptions/1988e0e4-7595-4e9a-91cb-242d277198f0/resourceGroups/rg-priyankadget/providers/Microsoft.Web/sites/app-test2-eastus/config/web
