@@ -3,7 +3,7 @@ resource "azurerm_resource_group" "res-0" {
   name     = "rg-priyankadget"
 }
 resource "azurerm_windows_virtual_machine" "res-1" {
-  admin_password        = "ignored-as-imported"
+  admin_password        = "Admin@123"
   admin_username        = "priyankastro"
   location              = "centralindia"
   name                  = "priyankadget"
@@ -224,7 +224,7 @@ resource "azurerm_monitor_smart_detector_alert_rule" "res-21" {
   scope_resource_ids  = ["/subscriptions/1988e0e4-7595-4e9a-91cb-242d277198f0/resourcegroups/rg-priyankadget/providers/microsoft.insights/components/app-test2-eastus"]
   severity            = "Sev3"
   action_group {
-    ids = ["/subscriptions/1988e0e4-7595-4e9a-91cb-242d277198f0/resourcegroups/rg-tr/providers/microsoft.insights/actiongroups/application insights smart detection"]
+    ids = ["/subscriptions/1988e0e4-7595-4e9a-91cb-242d277198f0/resourcegroups/rg-tr/providers/microsoft.insights/actionGroups/application insights smart detection"]
   }
   depends_on = [
     azurerm_resource_group.res-0,
