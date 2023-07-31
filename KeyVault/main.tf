@@ -1,3 +1,12 @@
+provider "azurerm" {
+  features {
+    key_vault {
+      purge_soft_delete_on_destroy    = true
+      recover_soft_deleted_key_vaults = true
+    }
+  }
+}
+
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "example" {
@@ -6,45 +15,30 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_key_vault" "example" {
-  name                = "examplekeyvault"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  tenant_id           = data.azurerm_client_config.current.tenant_id
-  sku_name            = "premium"
-}
+  name                        = "examplekeyvault"
+  location                    = azurerm_resource_group.example.location
+  resource_group_name         = azurerm_resource_group.example.name
+  enabled_for_disk_encryption = true
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days  = 7
+  purge_protection_enabled    = false
 
-resource "azurerm_key_vault_access_policy" "example" {
-  key_vault_id = azurerm_key_vault.example.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = data.azurerm_client_config.current.object_id
+  sku_name = "standard"
 
-  certificate_permissions = [
-    "ManageContacts",
-  ]
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
 
-  key_permissions = [
-    "Create",
-  ]
+    key_permissions = [
+      "Get",
+    ]
 
-  secret_permissions = [
-    "Set",
-  ]
-}
+    secret_permissions = [
+      "Get",
+    ]
 
-resource "azurerm_key_vault_certificate_contacts" "example" {
-  key_vault_id = azurerm_key_vault.example.id
-
-  contact {
-    email = "example@example.com"
-    name  = "example"
-    phone = "01234567890"
+    storage_permissions = [
+      "Get",
+    ]
   }
-
-  contact {
-    email = "example2@example.com"
-  }
-
-  depends_on = [
-    azurerm_key_vault_access_policy.example
-  ]
 }
