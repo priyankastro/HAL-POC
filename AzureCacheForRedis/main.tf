@@ -1,8 +1,3 @@
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
-}
-
 # NOTE: the Name used for Redis needs to be globally unique
 resource "azurerm_redis_cache" "example" {
   name                = "example-cache"
