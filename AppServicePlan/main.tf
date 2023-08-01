@@ -1,5 +1,5 @@
-provider "azurerm" {
-  features {}
+module "ResourceGroup" {
+  source = "../../ResourceGroup"
 }
 
 resource "azurerm_resource_group" "example" {
