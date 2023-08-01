@@ -65,3 +65,22 @@ module "ApplicationInsights" {
   application_insights_resourceGroupName = data.azurerm_resource_group.TR01.name
   application_insights_application_type = "web"
 }
+
+module "AzureCacheForRedis" {
+  source = "./AzureCacheForRedis"
+  redis_cache_location = local.eastus
+  redis_cache_resourceGroupName = data.azurerm_resource_group.TR01.name
+  redis_cache_capacity = 0
+  redis_cache_family = "C"
+  redis_cache_sku_name = "Basic"
+  redis_cache_minimum_tls_version = "1.2"
+}
+
+module "AzureDatabricksSystem" {
+  source = "./AzureDatabricksSystem"
+  databricks_workspace_name = "databricks-01-test"
+  databricks_workspace_location = local.eastus
+  databricks_workspace_resourceGroupName = data.azurerm_resource_group.TR01.name
+  databricks_workspace_sku = "trial"
+  databricks_workspace_tags = local.dev_tags
+}
