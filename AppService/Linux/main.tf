@@ -1,11 +1,15 @@
 module "AppServicePlan" {
   source = "../../AppServicePlan"
+  location = var.location
+  resourceGroupName = var.resourceGroupName
 }
-resource "azurerm_linux_web_app" "example" {
-  name                = "example"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_service_plan.example.location
-  service_plan_id     = azurerm_service_plan.example.id
+resource "azurerm_linux_web_app" "linux" {
+  name                = "${var.basename}app"
+  resource_group_name = var.resourceGroupName
+  location            = module.AppServicePlan.location
+  service_plan_id     = module.AppServicePlan.id
 
   site_config {}
+
+  depends_on = [ module.AppServicePlan ]
 }

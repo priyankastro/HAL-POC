@@ -1,8 +1,8 @@
-variable "resource_group_name" {
+variable "basename" {
   type = string
   description = "Enter base name (Resource Group)"
 }
-variable "resource_group_location" {
+variable "location" {
   type = string
   description = "Enter Resource Group location"
 }

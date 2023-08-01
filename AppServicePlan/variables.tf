@@ -1,7 +1,3 @@
-variable "basename" {
-  type = string
-  description = "Enter base name (App Service)"
-}
 variable "location" {
   type = string
   description = "Enter location"

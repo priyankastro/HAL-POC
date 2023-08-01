@@ -1,16 +1,13 @@
-module "ResourceGroup" {
-  source = "../../ResourceGroup"
+resource "random_string" "random" {
+  length = 6
+  special = false
+  upper = false
 }
 
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
-}
-
-resource "azurerm_service_plan" "example" {
-  name                = "example"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+resource "azurerm_service_plan" "sp" {
+  name                = "appserviceplan${random_string.random.result}"
+  resource_group_name = var.resourceGroupName
+  location            = var.location
   os_type             = "Linux"
-  sku_name            = "P1v2"
+  sku_name            = "B1"
 }
