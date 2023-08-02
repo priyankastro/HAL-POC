@@ -120,3 +120,25 @@ module "EventHubsNamespace" {
   eventhub_namespace_capacity = 1
   eventhub_namespace_tags = local.dev_tags
 }
+
+module "IotHub" {
+  source = "./IotHub"
+  iothub_name = "iothub-test-999-tf"
+  iothub_resourceGroupName = data.azurerm_resource_group.TR01.name
+  iothub_location = local.eastus
+  storage_container_storage_account_name = data.azurerm_storage_account.storageaccountvec6ck.name
+  eventhub_name = "eventhub-test-999-tf"
+  eventhub_namespace_name = data.azurerm_eventhub_namespace.ehub-test-999-tf.name
+  eventhub_namespace_partition_count = 2
+  eventhub_namespace_message_retention = 1
+  eventhub_authorization_rule_name = "acctest"
+  eventhub_authorization_rule_send = true
+  primary_blob_connection_string = data.azurerm_eventhub_namespace.ehub-test-999-tf.default_primary_connection_string
+}
+
+# module "MicrosoftPurviewAccount" {
+#   source = "./MicrosoftPurviewAccount"
+#   purview_account_name = "purview-test-999-tf"
+#   purview_account_resourceGroupName = data.azurerm_resource_group.TR01.name
+#   purview_account_location = local.eastus
+# }
