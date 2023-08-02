@@ -22,4 +22,3 @@ variable "redis_cache_minimum_tls_version" {
   type = string
   description = "Minimum TLS Version"
 }
-

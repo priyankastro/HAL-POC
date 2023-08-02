@@ -84,3 +84,39 @@ module "AzureDatabricksSystem" {
   databricks_workspace_sku = "trial"
   databricks_workspace_tags = local.dev_tags
 }
+
+module "ContainerRegistry" {
+  source = "./ContainerRegistry"
+  container_registry_name = "containerRegistry"
+  container_registry_resourceGroupName = data.azurerm_resource_group.TR01.name
+  container_registry_location = local.eastus
+  container_registry_sku = "Basic"
+  container_registry_tags = local.dev_tags
+}
+
+module "DataFactory" {
+  source = "./DataFactory"
+  data_factory_name = "df-test-999-tf"
+  data_factory_location = local.eastus
+  data_factory_resourceGroupName = data.azurerm_resource_group.TR01.name
+}
+
+module "EventGridSystemTopic" {
+  source = "./EventGridSystemTopic"
+  eventgrid_system_topic_name = "eg-test-999-tf"
+  eventgrid_system_topic_location = local.eastus
+  eventgrid_system_topic_resourceGroupName = data.azurerm_resource_group.TR01.name
+  eventgrid_system_topic_source_arm_resource_id = data.azurerm_storage_account.storageaccountvec6ck.id
+  eventgrid_system_topic_type = "Microsoft.Storage.StorageAccounts"
+  eventgrid_system_topic_tags = local.dev_tags
+}
+
+module "EventHubsNamespace" {
+  source = "./EventHubsNamespace"
+  eventhub_namespace_name = "ehub-test-999-tf"
+  eventhub_namespace_resourceGroupName = data.azurerm_resource_group.TR01.name
+  eventhub_namespace_location = local.eastus
+  eventhub_namespace_sku = "Basic"
+  eventhub_namespace_capacity = 1
+  eventhub_namespace_tags = local.dev_tags
+}

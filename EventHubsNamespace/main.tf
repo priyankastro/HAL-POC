@@ -1,16 +1,9 @@
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
-}
+resource "azurerm_eventhub_namespace" "eventhub_namespace" {
+  name                = var.eventhub_namespace_name
+  location            = var.eventhub_namespace_location
+  resource_group_name = var.eventhub_namespace_resourceGroupName
+  sku                 = var.eventhub_namespace_sku
+  capacity            = var.eventhub_namespace_capacity
 
-resource "azurerm_eventhub_namespace" "example" {
-  name                = "example-namespace"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  sku                 = "Standard"
-  capacity            = 2
-
-  tags = {
-    environment = "Production"
-  }
+  tags = var.eventhub_namespace_tags
 }
